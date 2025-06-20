@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Devine le Nombre</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 Devine un nombre entre 1 et 100</h1>
+    <p id="info">Tu as 10 essais</p>
+    <p id="credits"><strong>Ce jeu a été créé par KPETO KOKOUVI JOËL, Étudiant en Cybersécurité</strong></p>
+    <input type="number" id="nombre" placeholder="Entre ton nombre" />
+    <button onclick="verifier()">Vérifier</button>
+    <p id="resultat"></p>
+    <button onclick="rejouer()" id="rejouer" style="display:none;">🔄 Rejouer</button>
+  </div>
+  <audio id="sonWin" src="win.mp3" preload="auto"></audio>
+  <audio id="sonLose" src="lose.mp3" preload="auto"></audio>
+  <!-- <audio id="unlockAudio" src="silent.mp3" preload="auto"></audio> -->
+
+  <!-- <button id="testSonLose">Test Son Echec</button> -->
+
+  <script src="script.js"></script>
+</body>
+</html>

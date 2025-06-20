@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inscription - Devine le Nombre</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Créer un compte</h2>
+    <form id="registerForm">
+      <input type="text" id="name" placeholder="Nom complet" required /><br />
+      <input type="email" id="email" placeholder="Email" required /><br />
+      <input type="password" id="password" placeholder="Mot de passe (optionnel)" /><br />
+      <button type="submit">S’inscrire</button>
+    </form>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    const registerForm = document.getElementById('registerForm');
+    const message = document.getElementById('message');
+    const defaultPassword = "DefaultPassword123!";
+
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      let password = document.getElementById('password').value;
+
+      if (!password) {
+        password = defaultPassword;
+      }
+
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({name, email, password})
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          message.textContent = "Inscription réussie ! Redirection vers le jeu...";
+          message.classList.remove('error');
+          registerForm.reset();
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 2000);
+        } else {
+          message.textContent = "Erreur : " + data.message;
+          message.classList.add('error');
+        }
+      } catch (error) {
+        message.textContent = "Erreur réseau, réessaye plus tard.";
+        message.classList.add('error');
+      }
+    });
+  </script>
+</body>
+</html>
